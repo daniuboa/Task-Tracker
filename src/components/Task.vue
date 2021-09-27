@@ -1,5 +1,5 @@
 <template>
-<div class="task">
+<div :class="[task.reminder ? 'reminder' : '', 'task'] ">
     <h3>{{ task.text }}
     <div class="fas fa-times"></div>
     </h3>
