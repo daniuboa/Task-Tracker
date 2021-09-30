@@ -1,47 +1,56 @@
 <template>
   <div class="container">
-    <Header @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" />
+    <Header
+      @toggle-add-task="toggleAddTask"
+      title="Task Tracker"
+      :showAddTask="showAddTask"
+    />
     <div v-show="showAddTask">
       <AddTask @add-task="addTask" />
     </div>
-    <Tasks @toggle-reminder="toggleReminder" @delete-task="deleteTask" :tasks="tasks" />
+    <Tasks
+      @toggle-reminder="toggleReminder"
+      @delete-task="deleteTask"
+      :tasks="tasks"
+    />
   </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
-import Tasks from './components/Tasks.vue';
-import AddTask from "./components/AddTask.vue"
+import Tasks from "./components/Tasks.vue";
+import AddTask from "./components/AddTask.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     Tasks,
-    AddTask
+    AddTask,
   },
   data() {
     return {
       tasks: [],
       showAddTask: false,
-    }
+    };
   },
   methods: {
-    toggleAddTask(){
+    toggleAddTask() {
       this.showAddTask = !this.showAddTask;
     },
-    addTask(task){
+    addTask(task) {
       this.tasks = [...this.tasks, task];
     },
-    deleteTask(id){
-      if (confirm("Are you sure you want to delete?")){
-        this.tasks = this.tasks.filter((task) => task.id !== id)
+    deleteTask(id) {
+      if (confirm("Are you sure you want to delete?")) {
+        this.tasks = this.tasks.filter((task) => task.id !== id);
       }
-
     },
 
-    toggleReminder(id){
-      this.tasks = this.tasks.map((task) => task.id === id ? {...task, reminder: !task.reminder} : task)
+    toggleReminder(id) {
+      this.tasks = this.tasks.map((task) =>
+        task.id === id ? { ...task, reminder: !task.reminder } : task
+      );
     },
   },
   created() {
@@ -63,8 +72,8 @@ export default {
         text: "Grocery Shopping",
         day: "August 29 at 11.00 am",
         reminder: false,
-      }
-    ]
+      },
+    ];
   },
 };
 </script>
